@@ -1,5 +1,5 @@
 const express = require('express');
-const http = require('http');
+const https = require('https'); // Use the 'https' module for HTTPS requests
 const cors = require('cors'); // Import the cors middleware
 
 const app = express();
@@ -10,13 +10,13 @@ app.use(cors());
 app.use((req, res) => {
   const options = {
     hostname: '35.239.229.82',
-    port: 80, // HTTP port
+    port: 443, // Use port 443 for HTTPS
     path: '/api' + req.url, // Append the API path to the request
     method: req.method,
     headers: req.headers,
   };
 
-  const proxyReq = http.request(options, (proxyRes) => {
+  const proxyReq = https.request(options, (proxyRes) => { // Use 'https' for the proxy request
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res, { end: true });
   });
