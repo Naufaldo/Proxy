@@ -1,7 +1,11 @@
 const express = require('express');
 const http = require('http');
+const cors = require('cors'); // Import the cors middleware
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.use((req, res) => {
   const options = {
