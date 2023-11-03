@@ -1,5 +1,5 @@
 const express = require('express');
-const https = require('https'); // Use the 'https' module for HTTPS requests
+const http = require('http'); // Use the 'http' module for HTTP requests
 const cors = require('cors'); // Import the cors middleware
 
 const app = express();
@@ -16,7 +16,7 @@ app.use((req, res) => {
     headers: req.headers,
   };
 
-  const proxyReq = https.request(options, (proxyRes) => { // Use 'https' for the proxy request
+  const proxyReq = http.request(options, (proxyRes) => { // Use 'http' for the proxy request
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
     proxyRes.pipe(res, { end: true });
   });
